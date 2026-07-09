@@ -1,29 +1,23 @@
 # 🔗 URL Shortener
 
-A modern full-stack URL shortening application built with **React.js**, **Node.js**, **Express.js**, and **MongoDB**. It transforms long, complex URLs into short, shareable links through a clean and responsive interface.
+A modern full-stack URL shortening application built with **React.js**, **Node.js**, **Express.js**, and **MongoDB**. The application converts long URLs into short, shareable links through a clean, responsive, and user-friendly interface.
 
 ## 📖 Description
 
-URL Shortener is a fast and user-friendly web application that enables users to generate shortened URLs in seconds. It features a responsive UI, persistent link storage, and one-click copying for a seamless experience across desktop and mobile devices.
+URL Shortener is designed to simplify sharing long URLs by generating compact and easy-to-remember links. The project follows a full-stack architecture with a React frontend, an Express.js backend, and MongoDB for storing URL mappings. It focuses on performance, scalability, and an intuitive user experience.
 
-Whether you're sharing links on social media, in emails, or with friends, this application makes URLs shorter, cleaner, and easier to manage.
+## ✨ Planned Features
 
----
+* 🔗 Shorten any valid URL
+* 📋 Copy shortened links with one click
+* 💾 Store URL mappings in MongoDB
+* 📱 Fully responsive design
+* ⚡ Fast and intuitive user interface
+* ❌ URL validation with helpful error messages
+* 🎨 Modern UI built with Tailwind CSS
+* 🔄 Redirect users from short URLs to the original destination
 
-## ✨ Features
-
-* 🔗 Shorten any valid URL instantly
-* 📋 Copy shortened links with a single click
-* 💾 Persistent storage using MongoDB
-* 🔄 View previously shortened URLs even after refreshing the page
-* 📱 Fully responsive design for mobile, tablet, and desktop
-* ⚡ Fast and intuitive user experience
-* ❌ Input validation with meaningful error messages
-* 🎨 Clean, modern UI built with Tailwind CSS
-
----
-
-## 🚀 Tech Stack
+## 🛠️ Tech Stack
 
 ### Frontend
 
@@ -41,8 +35,6 @@ Whether you're sharing links on social media, in emails, or with friends, this a
 
 * MongoDB
 
----
-
 ## 📂 Project Structure
 
 ```text
@@ -53,23 +45,11 @@ url-shortener/
 ├── routes/          # API routes
 ├── controllers/     # Business logic
 ├── middleware/      # Custom middleware
+├── utils/           # Utility functions
 └── README.md
 ```
 
----
-
-## 🎯 Key Highlights
-
-* RESTful API architecture
-* Responsive and accessible UI
-* Secure backend validation
-* Clean folder structure
-* Scalable full-stack architecture
-* Easy deployment and maintenance
-
----
-
-## 🛠️ Installation
+## 🚀 Getting Started
 
 ### Clone the repository
 
@@ -90,11 +70,11 @@ npm install
 Backend
 
 ```bash
-cd server
+cd ../server
 npm install
 ```
 
-### Configure Environment Variables
+### Environment Variables
 
 Create a `.env` file inside the `server` directory.
 
@@ -104,7 +84,7 @@ PORT=5000
 BASE_URL=http://localhost:5000
 ```
 
-### Start the application
+### Run the project
 
 Backend
 
@@ -118,54 +98,21 @@ Frontend
 npm start
 ```
 
----
+## 🎯 Future Enhancements
 
-## 📸 Preview
-
-> Add screenshots or GIFs of your application here.
-
----
-
-## 🌐 Live Demo
-
-**Live Website:** *(Coming Soon)*
-
----
-
-## 📌 Future Improvements
-
-* User authentication
 * Custom short URLs
-* QR Code generation
-* URL analytics (click count, location, devices)
+* User authentication
+* QR code generation
+* URL analytics (click count, location, device)
 * Link expiration
 * Password-protected links
 * Dashboard for managing URLs
-* Dark mode
 * Rate limiting and spam protection
-
----
 
 ## 🤝 Contributing
 
-Contributions are always welcome!
-
-If you'd like to improve this project:
-
-1. Fork the repository
-2. Create a new feature branch
-3. Commit your changes
-4. Push the branch
-5. Open a Pull Request
-
-Please ensure your code follows the project's coding standards and includes clear commit messages.
-
----
+Contributions, suggestions, and feature requests are welcome. Feel free to fork the repository, open an issue, or submit a pull request.
 
 ## 📄 License
 
 This project is licensed under the MIT License.
-
----
-
-⭐ If you found this project useful, consider giving it a **Star** on GitHub!
