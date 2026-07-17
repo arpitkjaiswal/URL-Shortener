@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SnapLink | Modern URL Shortener & Analytics</title>
+  <meta name="description" content="Shorten your long URLs into clean, shareable links and track their performance with real-time click analytics.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Chart.js for beautiful analytics charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Animated Background Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="main-header">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <i data-lucide="link-2"></i>
+        </div>
+        <span class="logo-text">Snap<span class="highlight">Link</span></span>
+      </div>
+      <div class="header-badge">
+        <span class="status-dot"></span>
+        <span class="badge-text">v1.0 • Connected</span>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Intro Section -->
+      <section class="hero-section">
+        <h1>Shorten Links. <br><span class="gradient-text">Track Performance.</span></h1>
+        <p class="subtitle">An elegant, modern platform to convert clunky URLs into powerful, clean, and trackable links with live click analytics.</p>
+      </section>
+
+      <!-- Input Form Card -->
+      <section class="form-section">
+        <div class="glass-card form-card">
+          <form id="shorten-form">
+            <div class="input-wrapper">
+              <i data-lucide="link" class="input-icon"></i>
+              <input 
+                type="url" 
+                id="long-url" 
+                placeholder="Paste your long link here (e.g. https://example.com/very/long/path)..." 
+                required
+                autocomplete="off"
+              >
+              <button type="submit" class="btn-primary" id="submit-btn">
+                <span>Shrink</span>
+                <i data-lucide="arrow-right"></i>
+              </button>
+            </div>
+            
+            <!-- Custom Domain Panel (Collapsible) -->
+            <div class="settings-toggle-container">
+              <button type="button" class="btn-settings-toggle" id="settings-toggle-btn">
+                <i data-lucide="settings" style="width: 14px; height: 14px;"></i>
+                <span>Configure Domain/IP</span>
+              </button>
+            </div>
+            
+            <div id="settings-panel" class="settings-panel hidden">
+              <div class="settings-group">
+                <label for="custom-base-url"><i data-lucide="globe"></i> Base URL (e.g. http://192.168.1.10:8000 or https://mybrand.co)</label>
+                <input 
+                  type="text" 
+                  id="custom-base-url" 
+                  placeholder="Defaults to current page origin (e.g. http://localhost:8000)"
+                  autocomplete="off"
+                >
+                <span class="settings-help">If you need to share links across local networks or use a custom short domain, configure it here.</span>
+              </div>
+            </div>
+          </form>
+          
+          <!-- Quick stats / Info -->
+          <div class="form-footer">
+            <div class="footer-item"><i data-lucide="zap"></i> Instant redirection</div>
+            <div class="footer-item"><i data-lucide="bar-chart-3"></i> Live analytics tracking</div>
+            <div class="footer-item"><i data-lucide="qr-code"></i> Dynamic QR codes</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shortened Result Area (Hidden by default, shown when generated) -->
+      <section id="result-section" class="result-section hidden">
+        <div class="glass-card result-card">
+          <div class="result-header">
+            <h3>Link Generated successfully!</h3>
+            <span class="celebration-emoji">🎉</span>
+          </div>
+          
+          <div class="result-body">
+            <div class="url-display-box">
+              <span id="shortened-url-text" class="short-url-link">https://snaplink.co/xyz123</span>
+              <div class="action-buttons">
+                <button class="btn-action" id="copy-btn" title="Copy to clipboard">
+                  <i data-lucide="copy" class="btn-icon"></i>
+                  <span>Copy</span>
+                </button>
+                <button class="btn-action" id="qr-btn" title="Generate QR Code">
+                  <i data-lucide="qr-code" class="btn-icon"></i>
+                  <span>QR Code</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Dynamic QR Code Card (Collapsible) -->
+            <div id="qr-container" class="qr-container hidden">
+              <div class="qr-divider"></div>
+              <div class="qr-content">
+                <div class="qr-code-wrapper">
+                  <img id="qr-image" src="" alt="Short Link QR Code">
+                </div>
+                <div class="qr-info">
+                  <h4>Scan this QR Code</h4>
+                  <p>Instantly access the shortened URL on any mobile device. You can download or share it.</p>
+                  <a id="qr-download" href="#" download="qr-code.png" class="btn-secondary">
+                    <i data-lucide="download"></i> Download QR
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- History Dashboard -->
+      <section class="dashboard-section">
+        <div class="section-header">
+          <h2><i data-lucide="history"></i> Your Shortened Links</h2>
+          <span class="count-badge" id="history-count">0 Links</span>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="glass-card empty-card">
+          <div class="empty-icon-wrapper">
+            <i data-lucide="link-2"></i>
+          </div>
+          <h3>No shortened links yet</h3>
+          <p>Paste a long URL above to create your first trackable short link.</p>
+        </div>
+
+        <!-- History Table Grid -->
+        <div id="history-grid" class="history-grid hidden">
+          <!-- Links will be dynamically populated here -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>© 2026 SnapLink. Built with premium design standards.</p>
+      <div class="footer-links">
+        <a href="https://github.com/arpitkjaiswal/URL-Shortener" target="_blank"><i data-lucide="github"></i> Repository</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Analytics Modal (Drawer/Overlay) -->
+  <div id="analytics-modal" class="modal-overlay hidden">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-area">
+          <span class="modal-badge"><i data-lucide="bar-chart-2"></i> Live Analytics</span>
+          <h2 id="modal-short-id">Link: /abc12345</h2>
+        </div>
+        <button class="btn-close" id="close-modal-btn">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Analytics Top Stats -->
+        <div class="analytics-stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon-wrapper purple"><i data-lucide="mouse-pointer-click"></i></div>
+            <div class="stat-info">
+              <span class="stat-label">Total Clicks</span>
+              <span class="stat-val" id="stat-total-clicks">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon-wrapper blue"><i data-lucide="calendar"></i></div>
+            <div class="stat-info">
+              <span class="stat-label">Created On</span>
+              <span class="stat-val" id="stat-created-date">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Target Destination Info -->
+        <div class="destination-card">
+          <div class="dest-label">Original URL Destination</div>
+          <div class="dest-url-wrapper">
+            <a href="#" target="_blank" id="modal-dest-url" class="dest-url">https://example.com/original-destination-url</a>
+            <i data-lucide="external-link"></i>
+          </div>
+        </div>
+
+        <!-- Chart Container -->
+        <div class="chart-section">
+          <h3>Click Frequency over Time</h3>
+          <div class="chart-wrapper">
+            <canvas id="clicks-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- Clicks List (Chronological history) -->
+        <div class="clicks-list-section">
+          <h3>Recent Visits History</h3>
+          <div class="clicks-table-wrapper">
+            <table class="clicks-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Timestamp</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="clicks-list-body">
+                <!-- Dynamically populated clicks -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification System -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- JS Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
