@@ -1,118 +1,290 @@
-# 🔗 URL Shortener
 
-A modern full-stack URL shortening application built with **React.js**, **Node.js**, **Express.js**, and **MongoDB**. The application converts long URLs into short, shareable links through a clean, responsive, and user-friendly interface.
+# 🔗 SnapLink — Modern URL Shortener
 
-## 📖 Description
+<div align="center">
 
-URL Shortener is designed to simplify sharing long URLs by generating compact and easy-to-remember links. The project follows a full-stack architecture with a React frontend, an Express.js backend, and MongoDB for storing URL mappings. It focuses on performance, scalability, and an intuitive user experience.
+A modern full-stack URL Shortener that transforms long URLs into clean, shareable links with lightning-fast redirection, QR code generation, and a beautiful responsive interface.
 
-## ✨ Planned Features
+<p>
+  <img src="https://img.shields.io/github/license/arpitkjaiswal/URL-Shortener?style=for-the-badge" />
+  <img src="https://img.shields.io/github/stars/arpitkjaiswal/URL-Shortener?style=for-the-badge" />
+  <img src="https://img.shields.io/github/forks/arpitkjaiswal/URL-Shortener?style=for-the-badge" />
+</p>
 
-* 🔗 Shorten any valid URL
-* 📋 Copy shortened links with one click
-* 💾 Store URL mappings in MongoDB
-* 📱 Fully responsive design
-* ⚡ Fast and intuitive user interface
-* ❌ URL validation with helpful error messages
-* 🎨 Modern UI built with Tailwind CSS
-* 🔄 Redirect users from short URLs to the original destination
+⭐ **If you like this project, don't forget to leave a star!**
 
-## 🛠️ Tech Stack
+</div>
 
-### Frontend
+---
 
-* React.js
-* Tailwind CSS
-* HTML5
-* JavaScript (ES6+)
+# 📖 About
+
+SnapLink is a modern URL shortening platform built to make sharing links quick, simple, and efficient.
+
+Instead of sharing long and cluttered URLs, users can generate compact links that redirect instantly to the original destination. The application also provides QR code generation, URL history, and an elegant user interface for a seamless experience.
+
+The project follows a full-stack architecture with a responsive frontend, RESTful backend, and MongoDB for persistent storage.
+
+---
+
+# ✨ Features
+
+- 🔗 Instantly shorten any valid URL
+- 📋 Copy shortened links with one click
+- 📷 Generate QR Codes automatically
+- ⚡ Lightning-fast URL redirection
+- 📱 Fully responsive design
+- 🎨 Modern and intuitive UI
+- 🗂️ View recently shortened URLs
+- ❌ Smart URL validation
+- 💾 Persistent database storage
+- 🚀 Optimized for performance
+
+---
+
+# 📸 Preview
+
+> **Add screenshots here**
+
+| Home | Generated URL |
+|------|---------------|
+| ![](screenshots/home.png) | ![](screenshots/result.png) |
+
+| QR Code | URL History |
+|----------|-------------|
+| ![](screenshots/qr.png) | ![](screenshots/history.png) |
+
+---
+
+# 🏗️ Architecture
+
+```text
+                User
+                  │
+                  ▼
+          React Frontend
+                  │
+          REST API Requests
+                  │
+                  ▼
+         Express.js Server
+                  │
+          Business Logic
+                  │
+                  ▼
+              MongoDB
+```
+
+---
+
+# 📂 Project Structure
+
+```text
+📦 URL-Shortener
+│
+├── 📂 client
+│   ├── src
+│   ├── public
+│   └── package.json
+│
+├── 📂 server
+│   ├── controllers
+│   ├── middleware
+│   ├── models
+│   ├── routes
+│   ├── utils
+│   └── index.js
+│
+├── README.md
+└── package.json
+```
+
+---
+
+# 🚀 Getting Started
+
+## Clone the Repository
+
+```bash
+git clone https://github.com/arpitkjaiswal/URL-Shortener.git
+
+cd URL-Shortener
+```
+
+---
+
+## Install Dependencies
 
 ### Backend
 
-* Node.js
-* Express.js
-
-### Database
-
-* MongoDB
-
-## 📂 Project Structure
-
-```text
-url-shortener/
-├── client/          # React frontend
-├── server/          # Express backend
-├── models/          # MongoDB models
-├── routes/          # API routes
-├── controllers/     # Business logic
-├── middleware/      # Custom middleware
-├── utils/           # Utility functions
-└── README.md
-```
-
-## 🚀 Getting Started
-
-### Clone the repository
-
 ```bash
-git clone https://github.com/your-username/url-shortener.git
-cd url-shortener
-```
-
-### Install dependencies
-
-Frontend
-
-```bash
-cd client
+cd server
 npm install
 ```
 
-Backend
+### Frontend
 
 ```bash
-cd ../server
+cd ../client
 npm install
 ```
 
-### Environment Variables
+---
 
-Create a `.env` file inside the `server` directory.
+## Environment Variables
+
+Create a `.env` file inside the **server** folder.
 
 ```env
 MONGODB_URI=your_mongodb_connection_string
+
 PORT=5000
+
 BASE_URL=http://localhost:5000
 ```
 
-### Run the project
+---
 
-Backend
+## Run the Project
+
+### Backend
 
 ```bash
 npm run dev
 ```
 
-Frontend
+### Frontend
 
 ```bash
 npm start
 ```
 
-## 🎯 Future Enhancements
+The application should now be running locally.
 
-* Custom short URLs
-* User authentication
-* QR code generation
-* URL analytics (click count, location, device)
-* Link expiration
-* Password-protected links
-* Dashboard for managing URLs
-* Rate limiting and spam protection
+---
 
-## 🤝 Contributing
+# 📡 API
 
-Contributions, suggestions, and feature requests are welcome. Feel free to fork the repository, open an issue, or submit a pull request.
+## Create Short URL
 
-## 📄 License
+### POST
+
+```http
+POST /api/url
+```
+
+### Request
+
+```json
+{
+  "url": "https://example.com"
+}
+```
+
+### Response
+
+```json
+{
+  "shortId": "abc123"
+}
+```
+
+---
+
+# 🎯 Roadmap
+
+- [ ] Custom aliases
+- [ ] User authentication
+- [ ] Advanced analytics
+- [ ] Link expiration
+- [ ] Password-protected URLs
+- [ ] Browser extension
+- [ ] Bulk URL shortening
+- [ ] Public API
+- [ ] Dark/Light mode
+- [ ] Admin Dashboard
+
+---
+
+# 💡 Why I Built This
+
+This project was developed to deepen my understanding of full-stack web development by building a production-style application from scratch.
+
+While developing SnapLink, I gained hands-on experience with:
+
+- Designing scalable backend APIs
+- Building responsive user interfaces
+- Database integration
+- URL routing and redirection
+- RESTful architecture
+- Error handling and validation
+- End-to-end application development
+
+---
+
+# 🤝 Contributing
+
+Contributions are always welcome!
+
+If you'd like to improve this project:
+
+1. Fork the repository
+2. Create your feature branch
+
+```bash
+git checkout -b feature/AmazingFeature
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add AmazingFeature"
+```
+
+4. Push the branch
+
+```bash
+git push origin feature/AmazingFeature
+```
+
+5. Open a Pull Request
+
+---
+
+# 🌐 Live Demo
+
+Frontend:
+
+> Add your deployed frontend URL here
+
+Backend:
+
+> Add your backend API URL here
+
+---
+
+# 📄 License
 
 This project is licensed under the MIT License.
+
+---
+
+# 👨‍💻 Author
+
+**Arpit Kumar Jaiswal**
+
+🔗 GitHub  
+https://github.com/arpitkjaiswal
+
+💼 LinkedIn  
+https://www.linkedin.com/in/YOUR-LINKEDIN/
+
+---
+
+<div align="center">
+
+### ⭐ Star this repository if you found it useful!
+
+Made with ❤️ by **Arpit Kumar Jaiswal**
+
+</div>
