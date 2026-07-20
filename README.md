@@ -1,290 +1,131 @@
-
 # 🔗 SnapLink — Modern URL Shortener
 
-<div align="center">
-
-A modern full-stack URL Shortener that transforms long URLs into clean, shareable links with lightning-fast redirection, QR code generation, and a beautiful responsive interface.
-
-<p>
-  <img src="https://img.shields.io/github/license/arpitkjaiswal/URL-Shortener?style=for-the-badge" />
-  <img src="https://img.shields.io/github/stars/arpitkjaiswal/URL-Shortener?style=for-the-badge" />
-  <img src="https://img.shields.io/github/forks/arpitkjaiswal/URL-Shortener?style=for-the-badge" />
-</p>
-
-⭐ **If you like this project, don't forget to leave a star!**
-
-</div>
+A lightweight full-stack URL shortening app built with **Node.js**, **Express.js**, and **MongoDB**, serving a **Tailwind CSS** frontend. Paste a long link, get a short one instantly — with live click tracking and QR codes built in.
 
 ---
 
-# 📖 About
+## 📖 Overview
 
-SnapLink is a modern URL shortening platform built to make sharing links quick, simple, and efficient.
+SnapLink runs as a single Express server: it serves the frontend as static files and exposes the shortening/redirect API from the same app on the same port. There's no separate frontend dev server — clone it, install once, run once.
 
-Instead of sharing long and cluttered URLs, users can generate compact links that redirect instantly to the original destination. The application also provides QR code generation, URL history, and an elegant user interface for a seamless experience.
-
-The project follows a full-stack architecture with a responsive frontend, RESTful backend, and MongoDB for persistent storage.
+> Tagline from the app itself: **"Shorten Links. Track Performance."** — an elegant platform to convert clunky URLs into powerful, clean, trackable links with live click analytics.
 
 ---
 
-# ✨ Features
+## ✨ Features
 
-- 🔗 Instantly shorten any valid URL
-- 📋 Copy shortened links with one click
-- 📷 Generate QR Codes automatically
-- ⚡ Lightning-fast URL redirection
-- 📱 Fully responsive design
-- 🎨 Modern and intuitive UI
-- 🗂️ View recently shortened URLs
-- ❌ Smart URL validation
-- 💾 Persistent database storage
-- 🚀 Optimized for performance
+- 🔗 Paste any long URL and shrink it into a short link
+- 📋 One-click copy to clipboard (with a "Copied!" confirmation)
+- 🔄 Redirect from the short link to the original destination
+- 📊 Live click analytics — each shortened link tracks a visit count and timestamped visit history in MongoDB
+- 🎯 Dynamic QR code generation for every shortened link, with a download option
+- ⚙️ Configure a custom domain/IP to use when generating links
+- 📂 "Your Shortened Links" list — view previously created links with their click counts and original URLs
+- 🎨 Dark, modern responsive UI styled with Tailwind CSS
 
 ---
 
-# 📸 Preview
+## 🛠️ Tech Stack
 
-> **Add screenshots here**
-
-| Home | Generated URL |
-|------|---------------|
-| ![](screenshots/home.png) | ![](screenshots/result.png) |
-
-| QR Code | URL History |
-|----------|-------------|
-| ![](screenshots/qr.png) | ![](screenshots/history.png) |
+| Layer | Technologies |
+|---|---|
+| **Frontend** | HTML5, Tailwind CSS, JavaScript — served as static files from `public/` |
+| **Backend** | Node.js, Express.js |
+| **Database** | MongoDB (via Mongoose) |
+| **QR Codes** | [goqr.me API](https://goqr.me/api/) |
 
 ---
 
-# 🏗️ Architecture
+## 📂 Project Structure
 
 ```text
-                User
-                  │
-                  ▼
-          React Frontend
-                  │
-          REST API Requests
-                  │
-                  ▼
-         Express.js Server
-                  │
-          Business Logic
-                  │
-                  ▼
-              MongoDB
+url-shortener/
+├── controllers/     # Request handlers / business logic
+│   └── url.js
+├── models/           # Mongoose schema for URL documents
+│   └── url.js
+├── routes/           # API route definitions
+│   └── url.js
+├── public/           # Static frontend, served directly by Express
+│   ├── index.html
+│   ├── style.css
+│   └── app.js
+├── connect.js         # MongoDB connection setup
+├── index.js            # App entry point (starts the server)
+├── package.json
+└── README.md
 ```
 
 ---
 
-# 📂 Project Structure
+## 🚀 Getting Started
 
-```text
-📦 URL-Shortener
-│
-├── 📂 client
-│   ├── src
-│   ├── public
-│   └── package.json
-│
-├── 📂 server
-│   ├── controllers
-│   ├── middleware
-│   ├── models
-│   ├── routes
-│   ├── utils
-│   └── index.js
-│
-├── README.md
-└── package.json
-```
+### Prerequisites
 
----
+- [Node.js](https://nodejs.org/) (v16 or higher)
+- [MongoDB](https://www.mongodb.com/) running locally on the default port (`mongodb://127.0.0.1:27017`)
 
-# 🚀 Getting Started
-
-## Clone the Repository
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/arpitkjaiswal/URL-Shortener.git
-
-cd URL-Shortener
+git clone https://github.com/your-username/url-shortener.git
+cd url-shortener
 ```
 
----
-
-## Install Dependencies
-
-### Backend
+### 2. Install dependencies
 
 ```bash
-cd server
 npm install
 ```
 
-### Frontend
+### 3. Make sure MongoDB is running
 
-```bash
-cd ../client
-npm install
-```
+The app connects to `mongodb://127.0.0.1:27017/short-url` on startup. If your MongoDB runs elsewhere, update the connection string in `connect.js`.
 
----
-
-## Environment Variables
-
-Create a `.env` file inside the **server** folder.
-
-```env
-MONGODB_URI=your_mongodb_connection_string
-
-PORT=5000
-
-BASE_URL=http://localhost:5000
-```
-
----
-
-## Run the Project
-
-### Backend
-
-```bash
-npm run dev
-```
-
-### Frontend
+### 4. Run the server
 
 ```bash
 npm start
 ```
 
-The application should now be running locally.
+You'll see:
+
+```
+Server is running on port 8000
+Connected to MongoDB
+```
+
+Open **http://localhost:8000** — the frontend, API, and redirects are all served from this one port.
 
 ---
 
-# 📡 API
+## 🔌 API Reference
 
-## Create Short URL
-
-### POST
-
-```http
-POST /api/url
-```
-
-### Request
-
-```json
-{
-  "url": "https://example.com"
-}
-```
-
-### Response
-
-```json
-{
-  "shortId": "abc123"
-}
-```
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/url` | Create a shortened URL |
+| `GET` | `/:shortId` | Redirect to the original URL and log the visit |
 
 ---
 
-# 🎯 Roadmap
+## 🎯 Roadmap
 
-- [ ] Custom aliases
+- [ ] Custom short URL aliases (currently auto-generated)
 - [ ] User authentication
-- [ ] Advanced analytics
 - [ ] Link expiration
-- [ ] Password-protected URLs
-- [ ] Browser extension
-- [ ] Bulk URL shortening
-- [ ] Public API
-- [ ] Dark/Light mode
-- [ ] Admin Dashboard
+- [ ] Password-protected links
+- [ ] Analytics breakdown by location/device (currently tracks visit count + timestamp only)
+- [ ] Rate limiting and spam protection
 
 ---
 
-# 💡 Why I Built This
+## 🤝 Contributing
 
-This project was developed to deepen my understanding of full-stack web development by building a production-style application from scratch.
-
-While developing SnapLink, I gained hands-on experience with:
-
-- Designing scalable backend APIs
-- Building responsive user interfaces
-- Database integration
-- URL routing and redirection
-- RESTful architecture
-- Error handling and validation
-- End-to-end application development
+Contributions, suggestions, and feature requests are welcome. Feel free to fork the repository, open an issue, or submit a pull request.
 
 ---
 
-# 🤝 Contributing
+## 📄 License
 
-Contributions are always welcome!
+This project is open source and available under the [MIT License](LICENSE).
 
-If you'd like to improve this project:
-
-1. Fork the repository
-2. Create your feature branch
-
-```bash
-git checkout -b feature/AmazingFeature
-```
-
-3. Commit your changes
-
-```bash
-git commit -m "Add AmazingFeature"
-```
-
-4. Push the branch
-
-```bash
-git push origin feature/AmazingFeature
-```
-
-5. Open a Pull Request
-
----
-
-# 🌐 Live Demo
-
-Frontend:
-
-> Add your deployed frontend URL here
-
-Backend:
-
-> Add your backend API URL here
-
----
-
-# 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-# 👨‍💻 Author
-
-**Arpit Kumar Jaiswal**
-
-🔗 GitHub  
-https://github.com/arpitkjaiswal
-
-💼 LinkedIn  
-https://www.linkedin.com/in/YOUR-LINKEDIN/
-
----
-
-<div align="center">
-
-### ⭐ Star this repository if you found it useful!
-
-Made with ❤️ by **Arpit Kumar Jaiswal**
-
-</div>
